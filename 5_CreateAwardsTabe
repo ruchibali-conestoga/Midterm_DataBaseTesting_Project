@@ -1,0 +1,20 @@
+-- Table: public.awards
+
+-- DROP TABLE IF EXISTS public.awards;
+
+CREATE TABLE IF NOT EXISTS public.awards
+(
+    awardid integer NOT NULL DEFAULT nextval('awards_awardid_seq'::regclass),
+    movieid integer,
+    awardname character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT awards_pkey PRIMARY KEY (awardid),
+    CONSTRAINT awards_movieid_fkey FOREIGN KEY (movieid)
+        REFERENCES public.movies (movieid) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.awards
+    OWNER to postgres;
